@@ -58,7 +58,7 @@ model User{
     userIds String[] @db.ObjectId
     users User[] @relation(fields: [userIds], references: [id])
     
-      }
+   }
   model Message{
     id String @id @default(auto()) @map("_id") @db.ObjectId
     body String?

@@ -1,4 +1,5 @@
 "use client";
+import axios from "axios";
 import React, { useCallback } from "react";
 import { useState } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
@@ -6,6 +7,8 @@ import Input from "./inputs/Input";
 import Button from "./Button";
 import AuthSocialButton from "./AuthSocialButton";
 import { BsGithub, BsGoogle } from "react-icons/bs";
+import toast from "react-hot-toast";
+import { signIn } from "next-auth/react";
 type Varient = "LOGIN" | "REGISTER";
 
 const AuthForm = () => {
@@ -28,22 +31,58 @@ const AuthForm = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       email: "",
+      name: "",
       password: "",
     },
   });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
-    if (variant === "LOGIN") {
-      //axios register
-    }
     if (variant === "REGISTER") {
-      //nextauth login
+      axios
+        .post("/api/register", data)
+
+        .catch(() => {
+          toast.error("エラーが発生しました。もう一度お試しください。");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+    if (variant === "LOGIN") {
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("エラーが発生しました。もう一度お試しください。");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("ログインしました!");
+          }
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
+
   const socialAction = (action: string) => {
     setIsLoading(true);
-    //nextauth social login
+
+    signIn(action, { redirect: false })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("エラーが発生しました。もう一度お試しください。");
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("ログインしました!");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -69,8 +108,9 @@ const AuthForm = () => {
             errors={errors}
             disabled={isLoading}
           />
+
           <Input
-            id="Password"
+            id="password"
             label="Password"
             type="password"
             register={register}
