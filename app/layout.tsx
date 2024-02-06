@@ -10,7 +10,6 @@ export const metadata: Metadata = {
   title: "Message app",
   description: "For University of Nagoya students",
 };
-
 export default function RootLayout({
   children,
 }: {
