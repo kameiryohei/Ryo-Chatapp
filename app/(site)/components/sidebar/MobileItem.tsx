@@ -12,7 +12,7 @@ const MobileItem: React.FC<MobileItemProps> = ({
   active,
   onClick,
 }) => {
-  const hancleClick = () => {
+  const handleClick = () => {
     if (onClick) {
       return onClick();
     }
@@ -20,7 +20,7 @@ const MobileItem: React.FC<MobileItemProps> = ({
   return (
     <div>
       <Link
-        onClick={onClick}
+        onClick={handleClick}
         href={href}
         className={clsx(
           `group flex gap-x-3 text-sm leading-6 font-semibold w-full justify-center p-4 text-gray-500 hover:text-black hover:bg-gray-100`,
