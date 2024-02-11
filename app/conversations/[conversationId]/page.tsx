@@ -2,6 +2,8 @@ import EmptyState from "@/app/(site)/components/EmptyState";
 import getConversationByID from "@/app/acitons/getConversationByID";
 import getMessages from "@/app/acitons/getMessages";
 import Header from "./Header";
+import Body from "./components/Body";
+import Form from "../components/Form";
 
 interface IParams {
   conversationId: string;
@@ -25,6 +27,8 @@ const ConversationID = async ({ params }: { params: IParams }) => {
       <div className="h-full flex flex-col">
         <Header conversation={conversation} />
         {/*上のconversationを否定にするとエラー消える*/}
+        <Body />
+        <Form />
       </div>
     </div>
   );
