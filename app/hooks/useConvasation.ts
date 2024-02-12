@@ -4,21 +4,22 @@ import { useMemo } from "react";
 const useConversation = () => {
   const params = useParams();
 
-  const converstationId = useMemo(() => {
-    if (!params?.converstationId) {
+  const conversationId = useMemo(() => {
+    if (!params?.conversationId) {
       return "";
     }
-    return params.converstationId as string;
-  }, [params?.converstationId]);
 
-  const isOpen = useMemo(() => !!converstationId, [converstationId]); //boolean型にするために!!つけた
+    return params.conversationId as string;
+  }, [params?.conversationId]);
+
+  const isOpen = useMemo(() => !!conversationId, [conversationId]);
 
   return useMemo(
     () => ({
       isOpen,
-      converstationId,
+      conversationId,
     }),
-    [isOpen, converstationId]
+    [isOpen, conversationId]
   );
 };
 export default useConversation;
