@@ -27,7 +27,7 @@ const ConversationID = async ({ params }: { params: IParams }) => {
       <div className="h-full flex flex-col">
         <Header conversation={conversation} />
         {/*上のconversationを否定にするとエラー消える*/}
-        <Body />
+        <Body initialMessage={message} />
         <Form />
       </div>
     </div>
