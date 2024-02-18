@@ -22,7 +22,7 @@ const Avatar: React.FC<AvatarProps> = ({ user }) => {
         md:w-11
       "
       >
-        <img src={user?.image || "/images/avater.jpg"} alt="Avatar" />
+        <img src={user?.image || "/images/placeholder.jpg"} alt="Avatar" />
         {/*ここでImageを使用するとエラーが起こる。next-config.jｓは修正済み*/}
       </div>
       <span className="absolute block rounded-full bg-green-400 ring-2 top-0 right-0 h-2 w-2 md:h-3 md:w-3" />

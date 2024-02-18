@@ -5,7 +5,7 @@ import { FieldErrors, FieldValues, UseFormRegister } from "react-hook-form";
 interface InputProps {
   label: string;
   id: string;
-  name: string;
+
   type?: string;
   required?: boolean;
   register: UseFormRegister<FieldValues>;
@@ -16,7 +16,6 @@ interface InputProps {
 const Input: React.FC<InputProps> = ({
   label,
   id,
-  name,
   type,
   required,
   register,
