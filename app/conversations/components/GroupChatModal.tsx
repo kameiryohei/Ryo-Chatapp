@@ -1,3 +1,4 @@
+import Button from "@/app/(site)/components/Button";
 import Modal from "@/app/(site)/components/Modal";
 import Select from "@/app/(site)/components/Select";
 import Input from "@/app/(site)/components/inputs/Input";
@@ -76,6 +77,19 @@ const GroupChatModal: React.FC<GroupChatModalProps> = ({
               />
             </div>
           </div>
+        </div>
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+          <Button
+            disabled={isLoading}
+            onClick={onClose}
+            type="button"
+            secondary
+          >
+            キャンセル
+          </Button>
+          <Button disabled={isLoading} type="submit">
+            保存
+          </Button>
         </div>
       </form>
     </Modal>

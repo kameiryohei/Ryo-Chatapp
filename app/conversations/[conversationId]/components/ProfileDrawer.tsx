@@ -6,6 +6,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Avatar from "@/app/(site)/components/Avatar";
 import ConfirmModal from "./ConfirmModal";
+import AvatarGroup from "@/app/(site)/components/AvatarGroup";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -87,7 +88,11 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                       <div className="relative mt-6 flex-1 px-4 sm:px-6">
                         <div className="flex flex-col items-center">
                           <div className="mb-2">
-                            <Avatar user={otherUser} />
+                            {data.isGroup ? (
+                              <AvatarGroup users={data.users} />
+                            ) : (
+                              <Avatar user={otherUser} />
+                            )}
                           </div>
                           <div>{tittle}</div>
                           <div className="text-sm text-gray-500">
@@ -111,13 +116,15 @@ const ProfileDrawer: React.FC<ProfileDrawerProps> = ({
                           </div>
                           <div className="w-full pb-5 pt-5 sm:px-5 sm:pt-0">
                             <dl className="space-y-8 px-4 sm:space-y-6 sm:px-6">
-                              {!data.isGroup && (
+                              {data.isGroup && (
                                 <div>
-                                  <dt className="text-sm font-medium text-gray-500 sm:w-40 sm:flex-shrink-0">
-                                    Email
+                                  <dt className="text-sm font-medium text-gray-700 sm:w-40 sm:flex-shrink-0">
+                                    メールアドレス一覧
                                   </dt>
-                                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2">
-                                    {otherUser.email}
+                                  <dd className="mt-2 text-sm text-gray-900 sm:col-span-2">
+                                    {data.users
+                                      .map((user) => user.email)
+                                      .join(" ,")}
                                   </dd>
                                 </div>
                               )}
