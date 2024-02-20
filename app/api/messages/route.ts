@@ -66,7 +66,7 @@ export async function POST(request: Request) {
       updatedConversation.messages[updatedConversation.messages.length - 1];
 
     updatedConversation.users.map((user) => {
-      pusherServer.trigger(user.email!, "conversation updated", {
+      pusherServer.trigger(user.email!, "会話を更新しました", {
         id: conversationId,
         messages: [lastMessage],
       });
@@ -75,6 +75,6 @@ export async function POST(request: Request) {
     return NextResponse.json(newMessage);
   } catch (error: any) {
     console.log(error, "エラーです");
-    return new NextResponse("エラーです", { status: 500 });
+    return new NextResponse("エラーです", { status: 502 });
   }
 }

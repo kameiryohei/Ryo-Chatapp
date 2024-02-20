@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 
 import getCurrentUser from "@/app/acitons/getCurrentUser";
 import prisma from "@/app/libs/prismasb";
+import { pusherServer } from "@/app/libs/pusher";
 
 interface IParams {
   conversationId?: string;
@@ -60,9 +61,20 @@ export async function POST(request: Request, { params }: { params: IParams }) {
       },
     });
 
+    await pusherServer.trigger(currentUser.email, "messages:new", {
+      id: conversationId,
+      messages: [updatedMessage],
+    });
+
+    if (lastMessage.seenIds.indexOf(currentUser.id) != -1) {
+      return NextResponse.json(conversation);
+    }
+
+    await pusherServer.trigger(conversationId!, "messages:new", updatedMessage);
+
     return new NextResponse("Success");
   } catch (error) {
     console.log(error, "ERROR_MESSAGES_SEEN");
-    return new NextResponse("Error", { status: 500 });
+    return new NextResponse("Error", { status: 502 });
   }
 }
