@@ -2,6 +2,7 @@ import getCurrentUser from "@/app/acitons/getCurrentUser";
 import { NextResponse } from "next/server";
 
 import prisma from "@/app/libs/prismasb";
+import { pusherServer } from "@/app/libs/pusher";
 
 interface IParams {
   conversationId?: string;
@@ -39,6 +40,16 @@ export async function DELETE(
           hasSome: [currentUser.id],
         },
       },
+    });
+
+    existingConversation.users.forEach((user) => {
+      if (user.id !== currentUser.id) {
+        pusherServer.trigger(
+          user.email,
+          "会話が削除されました",
+          existingConversation
+        );
+      }
     });
 
     return NextResponse.json(deletedConversation);
