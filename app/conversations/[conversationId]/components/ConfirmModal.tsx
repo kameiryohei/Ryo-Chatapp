@@ -68,12 +68,12 @@ const ConfirmModal: React.FC<ConfirmModalProps> = ({ isOpen, onClose }) => {
           </div>
         </div>
       </div>
-      <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <Button disabled={isLoading} danger onClick={onDelete}>
-          削除
-        </Button>
+      <div className="mt-5 gap-4 flex justify-center sm:mt-8 ">
         <Button disabled={isLoading} secondary onClick={onClose}>
           キャンセル
+        </Button>
+        <Button disabled={isLoading} danger onClick={onDelete}>
+          削除
         </Button>
       </div>
     </Modal>
