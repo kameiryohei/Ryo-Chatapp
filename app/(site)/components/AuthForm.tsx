@@ -97,12 +97,12 @@ const AuthForm = () => {
 
   return (
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-      <div className="bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
+      <div className="bg-white px-4 py-8 shadow-lg sm:rounded-lg sm:px-10">
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           {variant === "REGISTER" && (
             <Input
               id="name"
-              label="Name"
+              label="名前"
               register={register}
               errors={errors}
               disabled={isLoading}
@@ -110,7 +110,7 @@ const AuthForm = () => {
           )}
           <Input
             id="email"
-            label="Email address"
+            label="メールアドレス"
             type="email"
             register={register}
             errors={errors}
@@ -119,14 +119,14 @@ const AuthForm = () => {
 
           <Input
             id="password"
-            label="Password"
+            label="パスワード"
             type="password"
             register={register}
             errors={errors}
             disabled={isLoading}
           />
           <Button disabled={isLoading} fullWidht type="submit">
-            {variant === "LOGIN" ? "Sign in" : "Register"}
+            {variant === "LOGIN" ? "サインイン" : "新規登録"}
           </Button>
         </form>
         <div className="mt-6">
@@ -162,7 +162,10 @@ const AuthForm = () => {
             ? "新しくアカウントを作成しますか？ "
             : "すでにアカウントをお持ちですか？"}
 
-          <div onClick={toggleVarient} className="underline cursor-pointer">
+          <div
+            onClick={toggleVarient}
+            className="underline cursor-pointer text-blue-500"
+          >
             {variant === "LOGIN" ? "ここをクリック" : "ログイン"}
           </div>
         </div>
