@@ -65,10 +65,12 @@ const AuthForm = () => {
       })
         .then((callback) => {
           if (callback?.error) {
-            toast.error("エラーが発生しました。もう一度お試しください。");
+            toast.error(
+              "ログイン時にエラーが発生しました。もう一度お試しください。"
+            );
           }
           if (callback?.ok && !callback?.error) {
-            toast.success("ログインしました!");
+            toast.success("ログインしました!しばらくお待ちください・・・");
             router.push("/users");
           }
         })
@@ -84,10 +86,12 @@ const AuthForm = () => {
     signIn(action, { redirect: false })
       .then((callback) => {
         if (callback?.error) {
-          toast.error("エラーが発生しました。もう一度お試しください。");
+          toast.error(
+            "ログイン時にエラーが発生しました。もう一度お試しください。"
+          );
         }
         if (callback?.ok && !callback?.error) {
-          toast.success("ログインしました!");
+          toast.success("ログインしました!しばらくお待ちください・・・!");
         }
       })
       .finally(() => {
